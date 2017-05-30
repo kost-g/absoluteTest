@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="absoluteTest@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.0">
+    <root id="1"/>
+    <schema id="2" parent="1" name="absoluteTest">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="bwttest"/>
+    <schema id="4" parent="1" name="bwt_test"/>
+    <schema id="5" parent="1" name="catalog"/>
+    <schema id="6" parent="1" name="information_schema"/>
+    <schema id="7" parent="1" name="kessler"/>
+    <schema id="8" parent="1" name="luna_db"/>
+    <schema id="9" parent="1" name="magenear"/>
+    <schema id="10" parent="1" name="magentotheme"/>
+    <schema id="11" parent="1" name="megamenucom"/>
+    <schema id="12" parent="1" name="mysql"/>
+    <schema id="13" parent="1" name="new_database"/>
+    <schema id="14" parent="1" name="new_db"/>
+    <schema id="15" parent="1" name="performance_schema"/>
+    <schema id="16" parent="1" name="sql_test"/>
+    <schema id="17" parent="1" name="sys"/>
+    <schema id="18" parent="1" name="testnews"/>
+    <schema id="19" parent="1" name="yii2basic"/>
+    <schema id="20" parent="1" name="yii2shop"/>
+    <schema id="21" parent="1" name="yii2test"/>
+    <schema id="22" parent="1" name="yii2_loc"/>
+    <schema id="23" parent="1" name="ACL"/>
+    <table id="24" parent="2" name="premission"/>
+    <table id="25" parent="2" name="user"/>
+    <column id="26" parent="24" name="id">
+      <Position>1</Position>
+      <DataType>int(10) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="27" parent="24" name="role">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="28" parent="24" name="upload_files">
+      <Position>3</Position>
+      <DataType>tinyint(1) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <column id="29" parent="24" name="distribute_tasks">
+      <Position>4</Position>
+      <DataType>tinyint(1) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <column id="30" parent="24" name="view_tasks">
+      <Position>5</Position>
+      <DataType>tinyint(1) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <column id="31" parent="24" name="mark_done_tasks">
+      <Position>6</Position>
+      <DataType>tinyint(1) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <index id="32" parent="24" name="role">
+      <ColNames>role</ColNames>
+    </index>
+    <key id="33" parent="24" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="34" parent="25" name="user_id">
+      <Position>1</Position>
+      <DataType>int(10) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="35" parent="25" name="name">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="36" parent="25" name="password">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="37" parent="25" name="role">
+      <Position>4</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <index id="38" parent="25" name="role">
+      <ColNames>role</ColNames>
+    </index>
+    <key id="39" parent="25" name="PRIMARY">
+      <ColNames>user_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="40" parent="25" name="user_ibfk_1">
+      <ColNames>role</ColNames>
+      <RefSchemaName>absoluteTest</RefSchemaName>
+      <RefTableName>premission</RefTableName>
+      <RefColNames>role</RefColNames>
+      <OnUpdate>update</OnUpdate>
+    </foreign-key>
+  </database-model>
+</dataSource>
