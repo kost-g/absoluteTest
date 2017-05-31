@@ -1,9 +1,11 @@
 <?php
+ob_start();
 $pdo = new PDO("mysql:host=localhost;dbname=absoluteTest", "root", "");
 
 if(!isset($_COOKIE['user_id'])) {
 	if(isset($_POST['submit'])) {
 		$user_name = trim($_POST['name']);
+		var_dump($_POST);
 		$user_password = sha1(trim($_POST['password']));
 		if(!empty($user_name) && !empty($user_password)){
 			$sql = "SELECT COUNT(*) FROM `user` WHERE name = :name AND password = :password";
@@ -15,26 +17,14 @@ if(!isset($_COOKIE['user_id'])) {
                 $stmt = $pdo->prepare($sql);
                 $stmt->execute(['name' => $user_name, 'password' => $user_password]);
 				$row = $stmt->fetch(PDO::FETCH_ASSOC);
-				setcookie('user_id', $row['user_id'], time() + (60*60*24*30));
-				setcookie('name', $row['name'], time() + (60*60*24*30));
-				setcookie('role', $row['role'], time() + (60*60*24*30));
-                switch ($row['role']){
-                    case 'admin':
-                        header('Location: ' . '/admin.php');
-                        break;
-                    case 'mother':
-                        header('Location: ' . '/mother.php');
-                        break;
-                    case 'father':
-                        header('Location: ' . '/father.php');
-                        break;
-                    case 'child':
-                        header('Location: ' . '/child.php');
-                        break;
-                    default:
-                        $home_url = 'http://' . $_SERVER['HTTP_HOST'];
-                        header('Location: '. $home_url);
-                }
+				if (!is_null($row['role'])){
+                    setcookie('user_id', $row['user_id'], time() + (60*60*24*30));
+                    setcookie('name', $row['name'], time() + (60*60*24*30));
+                    setcookie('role', $row['role'], time() + (60*60*24*30));
+                    header('Location: ' . '/housework.php');
+                }else{
+				echo 'Your account have no role, ask admin';
+				}
 			}
 			else {
 				echo 'Sorry, you must enter a valid username and password';
@@ -44,6 +34,9 @@ if(!isset($_COOKIE['user_id'])) {
 			echo 'Sorry, you must fill in the fields correctly';
 		}
 	}
+    $stmt = null;
+    $result = null;
+    $pdo = null;
 }
 ?>
 <!DOCTYPE html>
@@ -58,12 +51,8 @@ if(!isset($_COOKIE['user_id'])) {
 </head>
 <body>
 <header>
-<ul>
-
-</ul>
 </header>
 <content>
-
 </content>
 <section>
 <?php
@@ -77,14 +66,18 @@ if(!isset($_COOKIE['user_id'])) {
         <button type="submit" name="submit">Enter</button>
         <a href="signup.php">Registration</a>
     </form>
-
+        <ul>
+            <li>dad/dad</li>
+            <li>mom/mom</li>
+            <li>child1/child1</li>
+            <li>child2/child1</li>
+            <li>child3/child3 (without role)</li>
+        </ul>
 	</form>
 <?php
 }
 else {
-	?>
-	<p><a href="exit.php">Exit(<?php echo $_COOKIE['name']; ?>)</a></p>
-<?php	
+    header('Location: ' . '/housework.php');
 }
 ?>
 </section>
@@ -97,3 +90,7 @@ else {
 </body>
 
 </html>
+
+<?php
+ob_flush();
+?>

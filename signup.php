@@ -20,6 +20,7 @@ if(isset($_POST['submit'])){
 		}
 	}
 	$stmt = null;
+	$result = null;
     $pdo = null;
 }
 
@@ -45,6 +46,7 @@ if(isset($_POST['submit'])){
 	<label for="password">Enter password:</label>
 	<input type="password" name="password">
 	<button type="submit" name="submit">Enter</button>
+    <a href="index.php">Enter in account</a>
 	</form>
 </content>
 <footer class="clear">
