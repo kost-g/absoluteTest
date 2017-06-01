@@ -2,28 +2,6 @@
 
 $pdo = new PDO("mysql:host=localhost;dbname=absoluteTest", "root", "");
 
-if(isset($_POST['submit'])){
-    $name = trim($_POST['name']);
-    $password = sha1(trim($_POST['password']));
-	if(!empty($name) && !empty($password)){
-        $sql = "SELECT COUNT(*) FROM user WHERE name = :name";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute(['name' => $name]);
-        $result = $stmt->fetchColumn();
-        if ($result === '0') {
-            $stmt =$pdo->prepare("INSERT INTO `user` (`name`, `password`) VALUES (:name, :password)");
-            $stmt->execute(['name' => $name, 'password' => $password]);
-			echo 'Successful registration';
-		}
-		else if($result === '1'){
-			echo 'Login exist';
-		}
-	}
-	$stmt = null;
-	$result = null;
-    $pdo = null;
-}
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -39,7 +17,30 @@ if(isset($_POST['submit'])){
 
 </ul>
 </header>
-<content>
+<div class="container">
+    <?php
+    if(isset($_POST['submit'])){
+        $name = trim($_POST['name']);
+        $password = sha1(trim($_POST['password']));
+        if(!empty($name) && !empty($password)){
+            $sql = "SELECT COUNT(*) FROM user WHERE name = :name";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute(['name' => $name]);
+            $result = $stmt->fetchColumn();
+            if ($result === '0') {
+                $stmt =$pdo->prepare("INSERT INTO `user` (`name`, `password`) VALUES (:name, :password)");
+                $stmt->execute(['name' => $name, 'password' => $password]);
+                echo 'Successful registration';
+            }
+            else if($result === '1'){
+                echo 'Login exist';
+            }
+        }
+        $stmt = null;
+        $result = null;
+        $pdo = null;
+    }
+    ?>
 	<form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
 	<label for="name">Enter login:</label>
 	<input type="text" name="name">
@@ -48,7 +49,7 @@ if(isset($_POST['submit'])){
 	<button type="submit" name="submit">Enter</button>
     <a href="index.php">Enter in account</a>
 	</form>
-</content>
+</div>
 <footer class="clear">
 	<p>All rights reserved</p>
 </footer>
