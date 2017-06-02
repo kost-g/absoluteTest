@@ -4,13 +4,8 @@
     <bookmark url="file://$PROJECT_DIR$/distribute.inc.php" description="if(isset($_POST['submit'])){&#10;//    unset($_POST['s..." line="9" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c30f8c0a-0b92-4fb9-a1ae-e8a217b385f5" name="Default" comment="02/06/17">
+    <list default="true" id="c30f8c0a-0b92-4fb9-a1ae-e8a217b385f5" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/HouseworkDB.php" afterPath="$PROJECT_DIR$/HouseworkDB.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/distribute.inc.php" afterPath="$PROJECT_DIR$/distribute.inc.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/get_housework.inc.php" afterPath="$PROJECT_DIR$/get_housework.inc.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/housework.php" afterPath="$PROJECT_DIR$/housework.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploadFile.inc.php" afterPath="$PROJECT_DIR$/uploadFile.inc.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -69,7 +64,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="housework.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="housework.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/housework.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="289">
@@ -79,11 +74,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="get_housework.inc.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="get_housework.inc.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/get_housework.inc.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="30" column="49" lean-forward="true" selection-start-line="30" selection-start-column="49" selection-end-line="30" selection-end-column="49" />
+            <state relative-caret-position="544">
+              <caret line="32" column="61" lean-forward="true" selection-start-line="32" selection-start-column="61" selection-end-line="32" selection-end-column="61" />
               <folding />
             </state>
           </provider>
@@ -331,7 +326,7 @@
       <workItem from="1496155596810" duration="25996000" />
       <workItem from="1496231721646" duration="28489000" />
       <workItem from="1496346501067" duration="8054000" />
-      <workItem from="1496396600061" duration="2246000" />
+      <workItem from="1496396600061" duration="2369000" />
     </task>
     <task id="LOCAL-00001" summary="31/05/17">
       <created>1496234907990</created>
@@ -347,11 +342,18 @@
       <option name="project" value="LOCAL" />
       <updated>1496346652175</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="02/06/17">
+      <created>1496403404948</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1496403404948</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="105129000" />
+    <option name="totallyTimeSpent" value="105252000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -942,14 +944,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/get_housework.inc.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="30" column="49" lean-forward="true" selection-start-line="30" selection-start-column="49" selection-end-line="30" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/distribute.inc.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="113">
@@ -970,6 +964,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="26" column="23" lean-forward="true" selection-start-line="26" selection-start-column="23" selection-end-line="26" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/get_housework.inc.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="32" column="61" lean-forward="true" selection-start-line="32" selection-start-column="61" selection-end-line="32" selection-end-column="61" />
           <folding />
         </state>
       </provider>
