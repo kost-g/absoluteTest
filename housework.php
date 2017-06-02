@@ -28,12 +28,12 @@ $message = "";
     <header><p><a href="exit.php">Exit(<?php echo $name; ?>)</a></p></header>
         <?php
         if(!empty($name)){
-//            include "get_housework.inc.php";
+            include "get_housework.inc.php";
         }
         if($role == 'mother'){
-            include "uploadFile.inc.php";
+//            include "uploadFile.inc.php";
         }elseif($role == 'father'){
-//            include "distribute.inc.php";
+            include "distribute.inc.php";
         }
     ?>
     <?php
@@ -46,7 +46,6 @@ $message = "";
 </div>
 </body>
 </html>
-
 <?php
     ob_flush();
 ?>

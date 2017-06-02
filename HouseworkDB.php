@@ -41,12 +41,12 @@ class HouseworkDB{
         while($task = fgets($f)){
             $tasks[]= $task;
         }
-        $stmt = $this->pdo->prepare("INSERT INTO housework (`content`) VALUES :content");
-        foreach ($tasks as $id => $content)
+        var_dump($tasks);
+        $stmt = $this->pdo->prepare("INSERT INTO `housework` (`content`) VALUES (:content)");
+            foreach ($tasks as $id => $content)
         {
-            $stmt->execute($content);
+            $stmt->execute([":content" => $content]);
         }
         fclose($f);
     }
-
 }
