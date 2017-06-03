@@ -18,13 +18,13 @@ if(isset($_POST['submit2'])){
 <div>
     <h4>Distribution list</h4>
     <div>
+        <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
         <table border="1" cellpadding="5" cellspacing="0" width="100%">
             <tr>
                 <th>№</th>
                 <th>Housework</th>
                 <th>Responsible</th>
             </tr>
-            <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                 <?php
                 foreach($distribute_arr as $item){
                     ?>
@@ -54,7 +54,8 @@ if(isset($_POST['submit2'])){
                     <?php
                 }
                 ?>
-                <button type="submit" name="submit2">Save</button>
-            </form>
+        </table>
+         <button type="submit" name="submit2">Save</button>
+        </form>
     </div>
 </div>

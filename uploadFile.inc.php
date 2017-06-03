@@ -13,7 +13,6 @@ if(isset($_POST['submit1'])){
 ?>
 
 <div>
-    <h4>Load file menu</h4>
     <div>
         <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" enctype="multipart/form-data">
             <div class="form-group">

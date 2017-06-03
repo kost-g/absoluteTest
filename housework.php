@@ -31,7 +31,7 @@ $message = "";
             include "get_housework.inc.php";
         }
         if($role == 'mother'){
-//            include "uploadFile.inc.php";
+            include "uploadFile.inc.php";
         }elseif($role == 'father'){
             include "distribute.inc.php";
         }
