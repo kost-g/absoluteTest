@@ -30,10 +30,14 @@ $pdo = new PDO("mysql:host=localhost;dbname=absoluteTest", "root", "");
             if ($result === '0') {
                 $stmt =$pdo->prepare("INSERT INTO `user` (`name`, `password`) VALUES (:name, :password)");
                 $stmt->execute(['name' => $name, 'password' => $password]);
-                echo 'Successful registration';
+                ?>
+                <div class="alert alert-success" role="alert">Successful registration</div>
+                <?
             }
             else if($result === '1'){
-                echo 'Login exist';
+                ?>
+                <div class="alert alert-danger" role="alert">Login exist</div>
+                <?
             }
         }
         $stmt = null;
@@ -41,18 +45,20 @@ $pdo = new PDO("mysql:host=localhost;dbname=absoluteTest", "root", "");
         $pdo = null;
     }
     ?>
+    <h3 style="text-align: center">Registration form</h3>
 	<form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-	<label for="name">Enter login:</label>
-	<input type="text" name="name">
-	<label for="password">Enter password:</label>
-	<input type="password" name="password">
-	<button type="submit" name="submit">Enter</button>
-    <a href="index.php">Enter in account</a>
+        <div class="form-group">
+            <label for="name">Enter login:</label>
+            <input type="text" name="name" class="form-control" placeholder="username">
+        </div>
+        <div class="form-group">
+            <label for="password">Enter password:</label>
+            <input type="password" name="password" class="form-control" placeholder="password">
+        </div>
+        <button type="submit" name="submit" class="btn btn-default">Enter</button>
+        <a href="index.php" style="float:right">Enter in account</a>
 	</form>
 </div>
-<footer class="clear">
-	<p>All rights reserved</p>
-</footer>
 
 </body>
 

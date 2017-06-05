@@ -1,6 +1,5 @@
 <?php
-//     Check for load class
-// Include class
+
 ob_start();
 $name = $_COOKIE['name'];
 $role = $_COOKIE['role'];
@@ -10,6 +9,7 @@ if (!($name || $role)){
 }
 require_once "HouseworkDB.php";
 $housework = new HouseworkDB();
+
 $errMsg = "";
 $message = "";
 

@@ -21,7 +21,6 @@ $pdo = new PDO("mysql:host=localhost;dbname=absoluteTest", "root", "");
     if(!isset($_COOKIE['user_id'])) {
         if(isset($_POST['submit'])) {
             $user_name = trim($_POST['name']);
-            var_dump($_POST);
             $user_password = sha1(trim($_POST['password']));
             if(!empty($user_name) && !empty($user_password)){
                 $sql = "SELECT COUNT(*) FROM `user` WHERE name = :name AND password = :password";
@@ -59,22 +58,26 @@ $pdo = new PDO("mysql:host=localhost;dbname=absoluteTest", "root", "");
 <?php
 	if(empty($_COOKIE['name'])) {
 ?>
+    <h3 style="text-align: center">Enter form</h3>
     <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-        <label for="name">Enter login:</label>
-        <input type="text" name="name">
-        <label for="password">Enter password:</label>
-        <input type="password" name="password">
-        <button type="submit" name="submit">Enter</button>
-        <a href="signup.php">Registration</a>
+        <div class="form-group">
+            <label for="name">Enter login:</label>
+            <input type="text" name="name" class="form-control" placeholder="username">
+        </div>
+        <div class="form-group">
+            <label for="password">Enter password:</label>
+            <input type="password" name="password" class="form-control" placeholder="password">
+        </div>
+        <button type="submit" name="submit" class="btn btn-default">Enter</button>
+        <a href="signup.php" style="float:right">Registration</a>
     </form>
-        <ul>
+        <ul style="margin-top: 20px">
             <li>dad/dad</li>
             <li>mom/mom</li>
             <li>child1/child1</li>
             <li>child2/child1</li>
             <li>child3/child3 (without role)</li>
         </ul>
-	</form>
 <?php
 }
 else {
@@ -83,10 +86,6 @@ else {
 ?>
 </section>
 </div>
-<footer class="clear">
-    <p>All rights reserved</p>
-</footer>
-
 </body>
 
 </html>

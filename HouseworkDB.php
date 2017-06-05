@@ -36,17 +36,37 @@ class HouseworkDB{
         $stmt->execute($setDone);
     }
     public function importFile($uploadfile){
-        $f = fopen("$uploadfile", "r") or die("Impossible open file");
-        $tasks = [];
-        while($task = fgets($f)){
-            $tasks[]= $task;
-        }
-        var_dump($tasks);
-        $stmt = $this->pdo->prepare("INSERT INTO `housework` (`content`) VALUES (:content)");
+        //prepare path for file downloading
+        $uploaddir = implode("/", (explode( "\\" , $_FILES["file"]["tmp_name"], -3))) . '/domains/absoluteTest/uploads/' . time() . ".txt";
+        move_uploaded_file($uploadfile, $uploaddir);
+        $f = fopen("$uploaddir", "r") or die("Impossible open file");
+
+        $stmt_1 = $this->pdo->prepare("INSERT INTO `housework` (`content`) VALUES (:content)");
+        $stmt_2 = $this->pdo->prepare("INSERT INTO `files` (`file_path`) VALUES (:file_path )");
+
+        try {
+            $this->pdo->beginTransaction();
+            $tasks = [];
+            while($task = fgets($f)){
+                $tasks[]= $task;
+            }
+
+//            housework storing
             foreach ($tasks as $id => $content)
-        {
-            $stmt->execute([":content" => $content]);
+            {
+                $stmt_1->execute([":content" => $content]);
+            }
+
+//            housework files storing
+            $stmt_2->execute([":file_path" => $uploaddir]);
+            $this->pdo->commit();
+            return true;
+
+        } catch (Exception $e) {
+            $this->pdo->rollBack();
+            echo "Error: " . $e->getMessage();
+            return false;
         }
-        fclose($f);
     }
+
 }
