@@ -21,24 +21,27 @@ $pdo = new PDO("mysql:host=localhost;dbname=absoluteTest", "root", "");
     if(!isset($_COOKIE['user_id'])) {
         if(isset($_POST['submit'])) {
             $user_name = trim($_POST['name']);
-            $user_password = sha1(trim($_POST['password']));
+            $user_password = trim($_POST['password']);
             if(!empty($user_name) && !empty($user_password)){
-                $sql = "SELECT COUNT(*) FROM `user` WHERE name = :name AND password = :password";
+                $sql = "SELECT COUNT(*) FROM `user` WHERE name = :name ";
                 $stmt = $pdo->prepare($sql);
-                $stmt->execute(['name' => $user_name, 'password' => $user_password]);
+                $stmt->execute(['name' => $user_name]);
                 $result = $stmt->fetchColumn();
                 if($result === '1') {
-                    $sql = "SELECT `user_id` , `name`, `role` FROM `user` WHERE name = :name AND password = :password";
+                    $sql = "SELECT `user_id` , `name`, `role`, `password` FROM `user` WHERE name = :name";
                     $stmt = $pdo->prepare($sql);
-                    $stmt->execute(['name' => $user_name, 'password' => $user_password]);
+                    $stmt->execute(['name' => $user_name]);
                     $row = $stmt->fetch(PDO::FETCH_ASSOC);
-                    if (!is_null($row['role'])){
+                    if (is_null($row['role'])){
+                        echo 'Your account have no role, ask admin';
+                    }
+                    if (password_verify($user_password, $row['password'])){
                         setcookie('user_id', $row['user_id'], time() + (60*60*24*30));
                         setcookie('name', $row['name'], time() + (60*60*24*30));
                         setcookie('role', $row['role'], time() + (60*60*24*30));
                         header('Location: ' . '/housework.php');
                     }else{
-                        echo 'Your account have no role, ask admin';
+                        echo 'Sorry, you must enter a valid password';
                     }
                 }
                 else {
@@ -91,5 +94,7 @@ else {
 </html>
 
 <?php
+//var_dump($GLOBALS);
+//phpinfo();
 ob_flush();
 ?>

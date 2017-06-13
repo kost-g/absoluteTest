@@ -9,12 +9,12 @@ class HouseworkDB{
         unset($this->_db);
     }
     public function getHousework($name){
-        $stmt = $this->pdo->prepare("SELECT * FROM housework WHERE responsible = :name  AND done = 0 ");
+        $stmt = $this->pdo->prepare("SELECT * FROM housework WHERE responsible = :name ORDER BY DONE");
         $stmt->execute(['name' => $name]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     public function getDistributeHousework(){
-        $stmt = $this->pdo->prepare("SELECT * FROM housework WHERE done = 0 ");
+        $stmt = $this->pdo->prepare("SELECT * FROM housework");
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -31,9 +31,11 @@ class HouseworkDB{
         }
     }
     public function setHouseworkDone($setDone){
-        $in  = str_repeat('?,', count($setDone) - 1) . '?';
-        $stmt = $this->pdo->prepare("Update housework SET done = 1 where housework_id IN ($in)");
-        $stmt->execute($setDone);
+        $stmt = $this->pdo->prepare("Update housework SET done = :done where housework_id = :id");
+        foreach ($setDone as $key=> $val)
+        {
+            $stmt->execute(['done' => $val, 'id' => $key]);
+        }
     }
     public function importFile($uploadfile){
         //prepare path for file downloading

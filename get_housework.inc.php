@@ -8,9 +8,26 @@ if (empty($housework_arr)){
     $errMsg = "Error during housework printing";
 }
 if(isset($_POST['submit'])){
+    $housework_all = [];
+    foreach($housework_arr as $item){
+        $housework_all [(int) $item['housework_id']] = $item['done'];
+    }
+    var_dump($housework_all);
+    echo "$housework_all"."<br>";
+
     unset($_POST['submit']);
-    $setDone = array_keys($_POST);
-    $housework->setHouseworkDone($setDone);
+    $setDone = $_POST;
+    var_dump($_POST);
+    echo "_POST"."<br>";
+    foreach($housework_all as $key=> $val){
+        if(array_key_exists($key, $setDone )){
+            $housework_all[$key] = "1";
+        }else{
+            $housework_all[$key] = "0";
+        }
+    }
+    $housework->setHouseworkDone($housework_all);
+    echo "$housework_all"."<br>";
     $home_url = 'http://' . $_SERVER['HTTP_HOST'];
     header('Location: '. $home_url);
 }
@@ -31,7 +48,10 @@ if(isset($_POST['submit'])){
                     ?>
                     <tr> <td><?= $item['housework_id']?></td>
                         <td><?= $item['content']?></td>
-                        <td><input type="checkbox" name='<?=$item['housework_id']?>' value="1"></td>
+                        <td><input type="checkbox" name='<?=$item['housework_id']?>' value="1"
+                            <? if($item['done'] == 1){
+                                ?> checked <?}?>
+                            ></td>
                     </tr>
                     <?php
                 }

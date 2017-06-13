@@ -21,7 +21,7 @@ $pdo = new PDO("mysql:host=localhost;dbname=absoluteTest", "root", "");
     <?php
     if(isset($_POST['submit'])){
         $name = trim($_POST['name']);
-        $password = sha1(trim($_POST['password']));
+        $password = password_hash(trim($_POST['password']), PASSWORD_DEFAULT);
         if(!empty($name) && !empty($password)){
             $sql = "SELECT COUNT(*) FROM user WHERE name = :name";
             $stmt = $pdo->prepare($sql);
