@@ -1,7 +1,6 @@
 <?php
 ob_start();
-$pdo = new PDO("mysql:host=localhost;dbname=absoluteTest", "root", "");
-
+session_start();
 ?>
 <!DOCTYPE html>
 <html>
@@ -12,23 +11,23 @@ $pdo = new PDO("mysql:host=localhost;dbname=absoluteTest", "root", "");
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link href="style/style.css" rel="stylesheet">
 
-
 </head>
 <body>
 <header>
 </header>
 <div class="container">
 <?php
-    if(!isset($_COOKIE['user_id'])) {
-        if(isset($_POST['submit'])) {
+    if(!isset($_SESSION['user_id'])){
+        if(isset($_POST['submit'])){
             $user_name = trim($_POST['name']);
             $user_password = trim($_POST['password']);
             if(!empty($user_name) && !empty($user_password)){
+                require("bd.php");
                 $sql = "SELECT COUNT(*) FROM `user` WHERE name = :name ";
                 $stmt = $pdo->prepare($sql);
                 $stmt->execute(['name' => $user_name]);
                 $result = $stmt->fetchColumn();
-                if($result === '1') {
+                if($result == '1') {
                     $sql = "SELECT `user_id` , `name`, `role`, `password` FROM `user` WHERE name = :name";
                     $stmt = $pdo->prepare($sql);
                     $stmt->execute(['name' => $user_name]);
@@ -37,9 +36,9 @@ $pdo = new PDO("mysql:host=localhost;dbname=absoluteTest", "root", "");
                         echo 'Your account have no role, ask admin';
                     }
                     if (password_verify($user_password, $row['password'])){
-                        setcookie('user_id', $row['user_id'], time() + (60*60*24*30));
-                        setcookie('name', $row['name'], time() + (60*60*24*30));
-                        setcookie('role', $row['role'], time() + (60*60*24*30));
+                        $_SESSION['user_id']=$row['user_id'];
+                        $_SESSION['name']=$row['name'];
+                        $_SESSION['role']=$row['role'];
                         header('Location: ' . '/housework.php');
                     }else{
                         echo 'Sorry, you must enter a valid password';
@@ -55,18 +54,17 @@ $pdo = new PDO("mysql:host=localhost;dbname=absoluteTest", "root", "");
         }
         $stmt = null;
         $result = null;
-        $pdo = null;
     }
     ?>
 <section>
 <?php
-	if(empty($_COOKIE['name'])) {
+	if(empty($_SESSION['user_id'])) {
 ?>
     <h3 style="text-align: center">Enter form</h3>
     <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
         <div class="form-group">
             <label for="name">Enter login:</label>
-            <input type="text" name="name" class="form-control" placeholder="username">
+            <input type="text" name="name" class="form-control" placeholder="username" value="<?php echo @$_POST['name']?>">
         </div>
         <div class="form-group">
             <label for="password">Enter password:</label>

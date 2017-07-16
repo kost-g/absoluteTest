@@ -1,8 +1,3 @@
-<?php
-
-$pdo = new PDO("mysql:host=localhost;dbname=absoluteTest", "root", "");
-
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,18 +18,19 @@ $pdo = new PDO("mysql:host=localhost;dbname=absoluteTest", "root", "");
         $name = trim($_POST['name']);
         $password = password_hash(trim($_POST['password']), PASSWORD_DEFAULT);
         if(!empty($name) && !empty($password)){
+            require("bd.php");
             $sql = "SELECT COUNT(*) FROM user WHERE name = :name";
             $stmt = $pdo->prepare($sql);
             $stmt->execute(['name' => $name]);
             $result = $stmt->fetchColumn();
-            if ($result === '0') {
+            if ($result == '0') {
                 $stmt =$pdo->prepare("INSERT INTO `user` (`name`, `password`) VALUES (:name, :password)");
                 $stmt->execute(['name' => $name, 'password' => $password]);
                 ?>
                 <div class="alert alert-success" role="alert">Successful registration</div>
                 <?
             }
-            else if($result === '1'){
+            else if($result =='1'){
                 ?>
                 <div class="alert alert-danger" role="alert">Login exist</div>
                 <?
@@ -42,7 +38,6 @@ $pdo = new PDO("mysql:host=localhost;dbname=absoluteTest", "root", "");
         }
         $stmt = null;
         $result = null;
-        $pdo = null;
     }
     ?>
     <h3 style="text-align: center">Registration form</h3>

@@ -1,13 +1,16 @@
 <?php
 
 ob_start();
-$name = $_COOKIE['name'];
-$role = $_COOKIE['role'];
+session_start();
+ini_set('session.cookie_lifetime', '30');
+
+$name = $_SESSION['name'];
+$role = $_SESSION['role'];
 
 if (!($name || $role)){
     header('Location: ' . '/index.php');
 }
-require_once "HouseworkDB.php";
+require "HouseworkDB.php";
 $housework = new HouseworkDB();
 
 $errMsg = "";
